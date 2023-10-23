@@ -1,0 +1,101 @@
+[gd_scene load_steps=7 format=3 uid="uid://j5evi3fnr4su"]
+
+[ext_resource type="Script" path="res://Control.gd" id="1_3vkei"]
+[ext_resource type="Texture2D" uid="uid://bbx2nlel8uc6f" path="res://icon.svg" id="1_88yiw"]
+
+[sub_resource type="Animation" id="Animation_kelqm"]
+resource_name = "new_animation"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ikt37"]
+_data = {
+"new_animation": SubResource("Animation_kelqm")
+}
+
+[sub_resource type="Shader" id="Shader_raahy"]
+code = "shader_type canvas_item;
+
+
+uniform sampler2D tex : filter_linear_mipmap_anisotropic;
+void fragment() {
+	COLOR = texture(tex,UV);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lgmqn"]
+shader = SubResource("Shader_raahy")
+shader_parameter/tex = ExtResource("1_88yiw")
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -14.0
+offset_top = 17.0
+offset_right = -14.0
+offset_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 282.0
+offset_bottom = 33.0
+
+[node name="MenuBar" type="MenuBar" parent="PanelContainer"]
+layout_mode = 2
+flat = true
+
+[node name="MenuButton" type="MenuButton" parent="PanelContainer/MenuBar"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+text = "File"
+
+[node name="MenuButton2" type="MenuButton" parent="PanelContainer/MenuBar"]
+layout_mode = 0
+offset_left = 35.0
+offset_right = 70.0
+offset_bottom = 31.0
+text = "Edit"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ikt37")
+}
+
+[node name="Control" type="VBoxContainer" parent="."]
+clip_contents = true
+layout_mode = 2
+offset_left = 368.0
+offset_top = 88.0
+offset_right = 835.0
+offset_bottom = 401.0
+script = ExtResource("1_3vkei")
+
+[node name="Panel" type="Panel" parent="Control"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/Panel"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 17.0
+offset_bottom = 33.0
+text = "1"
+
+[node name="Panel" type="Panel" parent="Control/Panel"]
+layout_mode = 0
+offset_left = 45.0
+offset_right = 48.0
+offset_bottom = 40.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control"]
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control/ScrollContainer"]
+material = SubResource("ShaderMaterial_lgmqn")
+custom_minimum_size = Vector2(1500, 100)
+layout_mode = 2
