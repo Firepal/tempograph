@@ -1,3 +1,8 @@
+# The idea
+The concept is to 
+
+
+
 # Types used for simplicity
 
 ## OffsetUnit
@@ -13,28 +18,30 @@ Example:
 # Tempo declaration
 
 ## CONSTANT
-Describes a constant tempo that will simply be `bpm` until another declaration is found.
+Describes a constant tempo that will simply be `bpm` until the next tempo change.
 
 - beatsperminute (bpm): `float`
 - start_offset (sofs): `OffsetUnit`
 
-## POWER
+## LINE
 Describes a tempo that changes from `start_bpm` to `end_bpm`
 during `length` with a non-linearity of `power`.
+If `length` is left undefined, it will last until the next tempo change.
 
 - start_bpm (sbpm): `float`
 - end_bpm (ebpm): `float`
-- length: `float`
+- length (l): `float`
 - power (p): `float`
 - start_offset (sofs): `OffsetUnit`
 
 ## POLYNOMIAL
 Describes a tempo that changes from `start_bpm` to `end_bpm` during `length`
-with respect to the [0,1] bound of the xnd-degree polynomial function defined in `p`.
+with respect to the [0,1] range of the xnd-degree polynomial function defined in `p`.
+If `length` is left undefined, it will last until the next tempo change.
 
-- start_bpm (sbpm): `float`
-- end_bpm (ebpm): `float`
-- length: `float`
-- orders (p): `list(float)`
+- start_bpm (s): `float`
+- end_bpm (e): `float`
+- length(l): `float`
+- terms: list of `float`
 - start_offset (sofs): `OffsetUnit`
 
