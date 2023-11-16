@@ -30,17 +30,16 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -14.0
-offset_top = 17.0
-offset_right = -14.0
-offset_bottom = 17.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
-layout_mode = 0
-offset_right = 282.0
-offset_bottom = 33.0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.245
+anchor_bottom = 0.051
+offset_right = -0.23999
+offset_bottom = -0.0480003
 
 [node name="MenuBar" type="MenuBar" parent="PanelContainer"]
 layout_mode = 2
@@ -67,33 +66,35 @@ libraries = {
 [node name="Control" type="VBoxContainer" parent="."]
 clip_contents = true
 layout_mode = 2
-offset_left = 368.0
+offset_left = 50.0
 offset_top = 88.0
-offset_right = 835.0
-offset_bottom = 401.0
+offset_right = 1076.0
+offset_bottom = 532.0
 script = ExtResource("1_3vkei")
 
 [node name="Panel" type="Panel" parent="Control"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
+[node name="Panel" type="Panel" parent="Control/Panel"]
+z_index = 205
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+offset_left = 14.0
+offset_right = 16.0
+offset_bottom = 168.0
+
 [node name="Label" type="Label" parent="Control/Panel"]
-layout_mode = 0
-offset_left = 7.0
+layout_mode = 2
 offset_top = 7.0
-offset_right = 17.0
+offset_right = 10.0
 offset_bottom = 33.0
 text = "1"
-
-[node name="Panel" type="Panel" parent="Control/Panel"]
-layout_mode = 0
-offset_left = 45.0
-offset_right = 48.0
-offset_bottom = 40.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Control"]
 custom_minimum_size = Vector2(0, 400)
 layout_mode = 2
+size_flags_vertical = 8
 
 [node name="ColorRect" type="ColorRect" parent="Control/ScrollContainer"]
 material = SubResource("ShaderMaterial_lgmqn")

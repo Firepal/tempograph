@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgsquwlq87n0m"]
+
+[ext_resource type="Script" path="res://scaletest.gd" id="1_l2flb"]
+[ext_resource type="Texture2D" uid="uid://bbx2nlel8uc6f" path="res://icon.svg" id="2_qsauh"]
+
+[node name="scaletest" type="Node2D"]
+script = ExtResource("1_l2flb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(32, 271)
+scale = Vector2(0.035, 0.33)
+texture = ExtResource("2_qsauh")
+
+[node name="Node2D" type="Node2D" parent="."]
