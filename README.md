@@ -1,5 +1,7 @@
 # tempograph
 
+**Note:** this software suite is in the conception stage. Contributions welcome.
+
 `tempograph` comes in parts:
 
 - a dense text notation based on ffmpeg's filtergraph (`name=value:any_key=value`) to describe the tempo of a song (constant or variable)
@@ -9,4 +11,8 @@
 - a graphical interface to make tempo notation easy
 
 
-# [how](HOW.md)
+[Read more.](HOW.md)
+
+# Prior work
+
+- [Force Dynamics of Tempo Change in Music, 1992](https://continuum-hypothesis.com/music/feldman.pdf) (Jacob Feldman, David Epstein and Whitman Richards) is a covered application of manual tempo notation and analysis
