@@ -20,7 +20,7 @@ It's important for the `POLYNOMIAL` tempo change defined below.
 # Types used for simplicity
 
 ## OffsetUnit
-a number with at most 6 decimals that can represent either seconds or beats.
+a number with at most 6 decimals(?) that can represent either seconds or beats.
 This is denoted using a suffix.
 
 Example:
@@ -29,10 +29,10 @@ Example:
 `0.1b` means 1/10 of a beat. Can only be used if tempo was previously declared.
 
 
-# Tempo declaration
+# Tempo methods
 
 ## CONSTANT
-Describes a constant tempo that will simply be `bpm` until the next tempo change.
+Describes a constant tempo `bpm` until the next tempo change.
 
 - beatsperminute (bpm): `float`
 - start_offset (sofs): `OffsetUnit`
@@ -41,6 +41,7 @@ Describes a constant tempo that will simply be `bpm` until the next tempo change
 Describes a tempo that changes from `start_bpm` to `end_bpm`
 during `length` with a non-linearity of `power`.
 If `length` is left undefined, it will last until the next tempo change.
+If this is the last tempo change, `length` field *must* be set.
 
 - start_bpm (sbpm): `float`
 - end_bpm (ebpm): `float`
@@ -52,6 +53,7 @@ If `length` is left undefined, it will last until the next tempo change.
 Describes a tempo that changes from `start_bpm` to `end_bpm` during `length`
 with respect to the [0,1] XY-axis range of the xnd-degree polynomial function defined in `p`.
 If `length` is left undefined, it will last until the next tempo change.
+If this is the last tempo change, `length` field *must* be set.
 
 tempograph shall remap the X-axis from [0,1] to [0,length] (stretch) and the Y-axis from [0,1] to [s,e] automatically.
 

@@ -1,16 +1,12 @@
-# tempotools
+# tempograph
 
-a command-line thing which can play with a song's tempo, using special tempo metadata
+`tempograph` comes in parts:
 
-# goals
-allow one to:
-- define the full tempo of a song, with skips and non-linear tempo changes, using a GUI
-- remap the tempo using this detailed representation, in a GUI or on the command-line
+- a dense text notation based on ffmpeg's filtergraph (`name=value:any_key=value`) to describe the tempo of a song (constant or variable)
+
+- a software library which can query information about notated tempo (x beat's time, total beat count at x time, total time at x beats...) using analytical evaluation of the notation as an integral
+
+- a graphical interface to make tempo notation easy
 
 
 # [how](HOW.md)
-the idea is to have a metadata field for audio files (maybe called BPM_EXTENDED)
-which will store characteristics of the tempo such as simple "jump" tempo changes, linear tempo changes and non-linear tempo changes
-
-the software will be able to recognise (or be given) this metadata and allow the user
-to do various things with the song, including cutting every x beats, linearizing the whole song to one constant tempo
