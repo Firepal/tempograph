@@ -50,9 +50,9 @@ If this is the last tempo change, `length` field *must* be set.
 
 ## POLYNOMIAL (P)
 Describes a tempo that changes from `start_bpm` to `end_bpm` during `length`
-with respect to the [0,1] XY-axis range of the xnd-degree polynomial function defined in `p`.
-If `length` is left undefined, it will last until the next tempo change.
-If this is the last tempo change, `length` field *must* be set.
+with respect to the [0,1] XY-axis range of the xnd-degree polynomial function defined in `p`.<br>
+If `length` is left undefined, it will last until the next tempo change.<br>
+If this is the last tempo change, `length` field *must* be set.<br>
 
 tempograph shall remap the X-axis from [0,1] to [0,length] (scaled) and the Y-axis from [0,1] to [s,e] automatically.
 
