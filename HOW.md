@@ -23,21 +23,20 @@ or real time at any beat in the song, via analytical integration of each functio
 a number with at most 6 decimals(?) that can represent either seconds or beats.
 This is denoted using a suffix.
 
-Example:
-`0.166666` means 1/60th of a second.
+Example:<br>
+`0.166666` means 1/60th of a second.<br>
+`0.1b` means 1/10 of a beat.<br>(`b` suffix cannot be used for the first tempo change in a graph, as no prior tempo exists to integrate.)
 
-`0.1b` means 1/10 of a beat. Can only be used if tempo was previously declared.
 
+# Tempo functions
 
-# Tempo methods
-
-## CONSTANT
+## CONSTANT (C)
 Describes a constant tempo `bpm` until the next tempo change.
 
 - beatsperminute (bpm): `float`
 - start_offset (sofs): `OffsetUnit`
 
-## LINE
+## LINE (L)
 Describes a tempo that changes from `start_bpm` to `end_bpm`
 during `length` with a non-linearity of `power`.
 If `length` is left undefined, it will last until the next tempo change.
@@ -49,24 +48,22 @@ If this is the last tempo change, `length` field *must* be set.
 - power (p): `float`
 - start_offset (sofs): `OffsetUnit`
 
-## POLYNOMIAL
+## POLYNOMIAL (P)
 Describes a tempo that changes from `start_bpm` to `end_bpm` during `length`
 with respect to the [0,1] XY-axis range of the xnd-degree polynomial function defined in `p`.
 If `length` is left undefined, it will last until the next tempo change.
 If this is the last tempo change, `length` field *must* be set.
 
-tempograph shall remap the X-axis from [0,1] to [0,length] (stretch) and the Y-axis from [0,1] to [s,e] automatically.
+tempograph shall remap the X-axis from [0,1] to [0,length] (scaled) and the Y-axis from [0,1] to [s,e] automatically.
 
-Polynomials are curves that can go up and down over time. They should be pretty performant, as they're
-[easy to calculate integrals for.](en.wikipedia.org/wiki/Polynomial#Calculus)
+Polynomials are curves that can go up and down over time. They should be pretty performant, as they're easy to evaluate and 
+[calculate integrals for.](en.wikipedia.org/wiki/Polynomial#Calculus)
 
-This is intended for tempo changes where you think `LINE` might still be too linear and not flexible enough. 
-Musicians using DAWs may use "smooth"-type interpolation for tempo changes, 
-and this intends to be a catch-all solution to that.
+This is intended for tempo changes where you think other functions might still be too restrictive.
 
-Users are not expected to manually create the polynomial;
-they're expected to make CONSTANT tempo changes representing one beat each,
-and use 
+Users are not expected to manually set the terms;
+they're expected to map the beats by-hand
+and perform 
 [polynomial regression](https://en.wikipedia.org/wiki/Curve_fitting#Fitting_lines_and_polynomial_functions_to_data_points)
 on them.
 The graphical editor should have this functionality.
