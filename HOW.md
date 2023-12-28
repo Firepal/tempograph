@@ -1,21 +1,21 @@
 # The idea
-Let's represent song tempo as a list of integrals. 
-This should be nice and fast to analytically evaluate.
+Let's represent tempo as a list of functions. These functions return tempo as BPM. 
 
-With this representation,
-you'd be able to get "real" time at any beat in the song.
-The reverse should be true too, get the time in beats at any real time in the song.
+With this representation, you can get tempo at any time in a song.<br>
+You can also get the passed beats at any real time in the song,
+or real time at any beat in the song, via analytical integration of each function in sequence.
 
-You should also be able to make a transformation between two tempo representations.
+- This representation makes it possible to transform between two tempo representations.
 
-This allows one to, for example, take a song with variable tempo and transform it to constant tempo.
-(The reverse should also be possible.)
+  This allows one to, for example, take a song with variable tempo and transform it to constant tempo (and vice-versa).
 
-Could be extremely useful for rhythm game chart makers to map songs with variable tempo easily.
-Should be easy enough to just transform discrete note values using tempo representations.
+- Another application allows rhythm game chart makers to map songs with variable tempo easily.<br>
+  Should be easy enough to just transform discrete note values of their map format between tempo representations.
 
-A graphical editor for "tempo graphs" is a good idea. Could make it very accessible.
-It's important for the `POLYNOMIAL` tempo change defined below.
+- A graphical editor for "tempo graphs" is considered. Could make this very accessible.
+
+- A long-term goal would be to have a database of "tempo graphs" 
+  to allow anyone to contribute or download them, like MusicBrainz for music information.
 
 # Types used for simplicity
 
