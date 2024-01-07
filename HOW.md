@@ -74,3 +74,19 @@ The graphical editor should have this functionality.
 - terms: list of `float`
 - start_offset (sofs): `OffsetUnit`
 
+## Grammar
+
+- *program* → *funcList*
+- *funcList* → *funcList* *func* | *func*
+- *func* → *constant* | *line* | *polynomial*
+- *constant* → C *bpm* *offsetUnit*
+- *line* → L *bpm* *bpm* *length* *power* *offsetUnit*
+- *polynomial* → P *bpm* *bpm* *length* *terms* *offsetUnit*
+- *terms* → *terms* *term* | *term*
+- *term* → \<float\>
+- *length* → \<float\>
+- *power* → \<float\>
+- *bpm* → \<float\>
+- *length* → \<float\>
+- *power → \<float\>
+- *offsetUnit* → \<float\> | \<float\>b
