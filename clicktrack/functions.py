@@ -48,6 +48,26 @@ class TempoFunction:
         elif offset.mode == offset.BEATS:
             return TimePoint(offset.val, self.get_time(offset.val))
 
+    def is_in_range(self, offset: OffsetUnit):
+        if offset.mode == offset.BEATS:
+            self.is_beat_in_range(offset.val)
+        elif offset.mode == offset.SECONDS:
+            self.is_time_in_range(offset.val)
+
+    def is_beat_in_range(self, b):
+        return self.start.beat <= b <= self.end.beat
+
+    def is_time_in_range(self, t):
+        return self.start.time <= t <= self.end.time
+
+    def get_beats(self):
+        beats = []
+        b = np.ceil(self.start.beat)
+        while self.is_beat_in_range(b):
+            beats.append(TimePoint(b, self.get_time(b)))
+            b += 1
+        return beats
+
 class ConstantFunction(TempoFunction):
     def __init__(self, start:TimePoint, bpm: float, end:OffsetUnit):
         self.type = self.CONST
@@ -96,9 +116,12 @@ class LinearFunction(TempoFunction):
 
 
     def get_time(self, beat_num):
-
-        slope = (self.end.beat - self.start.beat) / (self.end.time - self.start.time)
-        y_int = self.start.beat
+        if beat_num == self.start.beat:
+            return self.start.time
+        if beat_num == self.end.beat:
+            return self.end.time
+        slope = (self.end_bpm / 60  - self.start_bpm / 60) / (self.end.time - self.start.time)
+        y_int = self.start_bpm / 60
 
         # terms for polynomial (integral of line)
         a = slope / 2
@@ -108,7 +131,7 @@ class LinearFunction(TempoFunction):
         roots = p1.roots()
         for r in roots:
             if 0 < r < self.end.time - self.start.time:
-                return r
+                return r + self.start.time
         raise ValueError
 
     def get_beat_num(self, elapsed_time):

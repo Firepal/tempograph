@@ -1,8 +1,15 @@
 from functions import ConstantFunction, LinearFunction, OffsetUnit, TimePoint
+from clicktrack import make_click_track
+
 
 def parse_file(filename):
     with open(filename) as f:
         lines = f.read().splitlines()
+
+    # Remove comment lines
+    # TODO: remove parts of lines that are commented
+    lines = [l for l in lines if not l.startswith("#")]
+
     functions = []
     start_offset = OffsetUnit(lines[0])
     if start_offset.mode == start_offset.BEATS:
@@ -26,7 +33,3 @@ def parse_file(filename):
             functions.append(LinearFunction(pos.copy(), start_bpm, end_bpm, power, end))
         pos = functions[-1].end.copy()
     return functions
-
-f = parse_file("../inputs/linear.tg")
-for i in f:
-    print(i)
