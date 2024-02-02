@@ -12,7 +12,7 @@ class TimePoint:
         m = int(self.time // 60)
         s = int(self.time % 60)
         p = int((self.time % 1) * 100)
-        return f"[{m:02d}:{s:02d}.{p:02d} {self.beat:.2f}]"
+        return f"[{m:02d}:{s:02d}.{p:02d} {self.beat:.2f}b]"
 
 class OffsetUnit:
     BEATS = 1
@@ -96,7 +96,7 @@ class ConstantFunction(TempoFunction):
         return self.start.beat + elapsed
 
     def __repr__(self):
-        return f"C:{self.start}--{self.bpm}--{self.end} "
+        return f"C:{self.start}--{self.bpm}--{self.end}"
 
 class LinearFunction(TempoFunction):
     def __init__(self, start:TimePoint, start_bpm: float, end_bpm:float, power:float, end:OffsetUnit):
@@ -109,7 +109,7 @@ class LinearFunction(TempoFunction):
             average_bpm = (self.start_bpm + self.end_bpm) / 2
             beats_length = seconds_length * average_bpm / 60
         elif end.mode == end.BEATS:
-            raise NotImplementedError("This would require a lot of algebra and I don't wanna do it right now")
+            raise NotImplementedError("This would require a lot of algebra and I don't wanna do it right now") # [its ok this is cool af - firepal]
         else:
             raise ValueError
         self.end = TimePoint(start.beat + beats_length, start.time + seconds_length)
@@ -148,4 +148,4 @@ class LinearFunction(TempoFunction):
         return self.start.beat + elapsed_beats
 
     def __repr__(self):
-        return f"L:{self.start}--{self.start_bpm}_{self.end_bpm}--{self.end} "
+        return f"L:{self.start}--{self.start_bpm}->{self.end_bpm}--{self.end} "
